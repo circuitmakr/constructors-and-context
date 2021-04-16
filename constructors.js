@@ -103,14 +103,22 @@ function Employee(name, email, hireDate) {
   
   // Code here
 
-  function User(name,age = 0,email,savedPosts = []){
+  function User(name,age,email,savedPosts){
     this.age = age
     this.name = name;
     this.age = age;
     this.email = email;
     this.savedPosts = savedPosts;
   }
-  
+
+  User.prototype.addSavedPost = function(id,title,rating){
+    post = new Object()
+    post.id = id;
+    post.title = title;
+    post.rating = rating;
+    this.savedPosts.push(post)
+  }
+
   ////////// PROBLEM 6 //////////
   
   // You will be using the constructor function you just created in problem 5.
@@ -118,7 +126,10 @@ function Employee(name, email, hireDate) {
   
   // Code here
   User.prototype.removeSavedPost = function(num){
-    delete savedPosts[num];
+  for(let i=0;i<this.savedPosts.length;i++)
+    if(this.savedPosts[i].id == num){
+    this.savedPosts.splice(this.savedPosts.indexOf(i))
+    }
   }
   
   ////////// PROBLEM 7 //////////
@@ -128,6 +139,9 @@ function Employee(name, email, hireDate) {
   
   // Code here
 User.prototype.changePostRating = function(id, newRating){
-  savedPosts[id].newRating =this.newRating;
+  for(let i=0;i<this.savedPosts.length;i++){
+  if(this.savedPosts[i].id == id){
+    this.savedPosts[i].rating = newRating;
+  }
+  }
 }
-  
